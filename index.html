@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>11.25</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./css/imagepreview/index.css">
+  </head>
+  <body>
+    <div class="main-container__wrap" id="app">
+      <normalcard :title="qiyejianli.title" :content="qiyejianli.content" :share-function="shareFunction"
+        :preview-img="qiyejianli.preview_img"
+      ></normalcard>
+      <lianxiwomen
+        :title="lianxiwomen.title"
+        :phone="lianxiwomen.phone"
+        :name="lianxiwomen.name"
+        :email="lianxiwomen.email"
+        :address="lianxiwomen.address"
+      ></lianxiwomen>
+      <normalcard :title="qiyekohao.title" :content="qiyekohao.content" :share-function="shareFunction"
+      ></normalcard>
+      <normalcard :title="pinpaigushi.title" :content="pinpaigushi.content" :share-function="shareFunction"
+        :preview-img="pinpaigushi.preview_img"
+      ></normalcard>
+
+      <tuce
+        :title="tuce.title"
+        :preview-list="tuce.itemList"
+        :is-show-more="tuce.isShowMore"
+      ></tuce>
+
+      <tuce
+        :title="rongyu.title"
+        :preview-list="rongyu.itemList"
+        :is-show-more="rongyu.isShowMore"
+      ></tuce>
+
+      <progresscomponent
+        :title="licheng.title"
+        :steps-list="licheng.stepsList"
+        :is-show-more="licheng.isShowMore"
+      ></progresscomponent>
+
+      <case
+      :title="anli.title"
+      :case-list="anli.caseList"
+      :is-show-more="anli.isShowMore"
+      ></case>
+
+      <kehu
+      :title="kehu.title"
+      :kehu-list="kehu.kehuList"
+      :is-show-more="kehu.isShowMore"
+      ></kehu>
+
+      <hezuohuoban
+      :title="hezuohuoban.title"
+      :kehu-list="hezuohuoban.kehuList"
+      :is-show-more="hezuohuoban.isShowMore"
+      ></hezuohuoban>
+
+      <meitizhanghao
+      :title="meitizhanghao.title"
+      :kehu-list="meitizhanghao.kehuList"
+      :is-show-more="meitizhanghao.isShowMore"
+      ></meitizhanghao>
+
+      <zixun
+      :title="zixun.title"
+      :news-list="zixun.newsList"
+      :is-show-more="zixun.isShowMore"
+      ></zixun>
+
+      <case
+      :title="'产品'"
+      :case-list="anli.caseList"
+      :is-show-more="anli.isShowMore"
+      desc-color="#FA2D2C"
+      ></case>
+      
+      <case
+      :title="shangpin.title"
+      :case-list="shangpin.caseList"
+      :is-show-more="shangpin.isShowMore"
+      :banner-height="'244px'"
+      ></case>
+
+      <wenda
+      :title="wenda.title"
+      :items-list="wenda.itemsList"
+      :is-show-more="wenda.isShowMore"
+      ></wenda>
+
+      <wenda
+      :title="zhishi.title"
+      :items-list="zhishi.itemsList"
+      :is-show-more="zhishi.isShowMore"
+      ></wenda>
+
+      <zhaopin
+      :title="zhaopin.title"
+      :items-list="zhaopin.itemsList"
+      :is-show-more="zhaopin.isShowMore"
+      ></zhaopin>
+    </div>
+    <div id="image-preview"></div>
+  </body>
+  <script src="./index.js"></script>
+  <script src="./js/jquery.js"></script>
+  <script src="./js/previewimg.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <script src="./components/shareCard/shareCard.js"></script>
+  <script src="./components/jibenxinxi/normalcard/normalcard.js"></script>
+  <script src="./components/jibenxinxi/lianxiwomen/lianxiwomen.js"></script>
+  <script src="./components/tuce/tuce.js"></script>
+  <script src="./components/progresscomponent/progresscomponent.js"></script>
+  <script src="./components/case/case.js"></script>
+  <script src="./components/kehu/kehu.js"></script>
+  <script src="./components/hezuohuoban/hezuohuoban.js"></script>
+  <script src="./components/meitizhanghao/meitizhanghao.js"></script>
+  <script src="./components/zixun/zixun.js"></script>
+  <script src="./components/wenda/wenda.js"></script>
+  <script src="./components/zhaopin/zhaopin.js"></script>
+  <script src="http://wechatfe.github.io/vconsole/lib/vconsole.min.js?v=3.2.0"></script>
+    <!-- <script>
+        // init vConsole
+        var vConsole = new VConsole();
+        console.log('Hello world');
+    </script> -->
+  <script>
+    isElementCollision = (ele, rowMaxHeight, cssStyles, removeChild) => {
+      if (!ele) {
+        return false;
+      }
+    
+      const clonedNode = ele.cloneNode(true);
+      // 给clone的dom增加样式
+      clonedNode.style.overflow = 'visible';
+      clonedNode.style.display = 'inline-block';
+      clonedNode.style.width = '100%';
+      clonedNode.style.visibility = 'hidden';
+      clonedNode.style.maxHeight = 'auto';
+      clonedNode.style.position = 'absolute';
+      clonedNode.style.top = '0';
+      clonedNode.style.left = '0';
+      // 将传入的css字体样式赋值
+      if (cssStyles) {
+        Object.keys(cssStyles).forEach((item) => {
+          clonedNode.style[item] = cssStyles[item];
+        });
+      }
+      
+      const parentNode = ele.parentElement
+
+      // 给clone的dom增加id属性
+      const containerClass = parentNode.classList[0] + '_collision_node_id';
+      clonedNode.setAttribute('class', containerClass);
+      
+      let tmpNode = parentNode.querySelector('.' + containerClass);
+      let newNode = clonedNode;
+      if (tmpNode) {
+        parentNode.replaceChild(clonedNode, tmpNode);
+      } else {
+        newNode = parentNode.appendChild(clonedNode);
+      }
+      // 新增的dom高度与原dom的最大高度
+      const differ = newNode.offsetHeight - rowMaxHeight;
+      if (removeChild) {
+        parentNode.removeChild(newNode);
+      }
+      return differ > 0;
+    };
+
+    var bus = new Vue()
+
+    var app = new Vue({
+      el: '#app',
+      delimiters: ["{[", "]}"],
+      data: {
+        message: '233',
+        qiyejianli: {
+          title: '企业简历',
+          content: `哔哩哔哩（Nasdaq:BILI ；英文名称：bilibili，简称B站）现为中国年轻世代高度聚集的文化社区和视频平台，该网站于2009年6月26日创建，被粉丝们亲切地称为“B站”。
+
+2018年3月28日，哔哩哔哩在美国纳斯达克上市；
+2020年9月15日，B站定制的视频遥感卫星——“哔哩哔哩视频卫星”成功升空。
+
+B站早期是一个ACG（动画、漫画、游戏）内容创作与分享的视频网站。经过十年多的发展，围绕用户、创作者和内容，构建了一个源源不断产生优质内容的生态系统，B站已经涵盖7000多个兴趣圈层的多元文化社区。`,
+          preview_img: 'http://qnpic.top/yoona4.jpg'
+        },
+        lianxiwomen: {
+          title: '联系我们',
+          phone: '021-2558122',
+          email: 'ad@asd.com',
+          address: '上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东上海市浦东',
+          name: 'chenxianshi'
+        },
+        qiyekohao: {
+          title: `企业口号`,
+          content: `bilibili目前拥有动画、番剧、国创、音乐、舞蹈、游戏、知识、生活、娱乐、鬼畜、时尚、放映厅等15个内容分区。生活、娱乐、游戏、动漫、科技是B站主要的内容品类，并开设直播、游戏中心、周边等业务板块。
+
+B站的特色是悬浮于视频上方的实时评论，即弹幕”。
+弹幕可以给观众一种“实时互动”的错觉， 用户可以在观看视频时发送弹幕，其他用户发送的弹幕也会同步出现在视频上方。
+弹幕能够构建出一种奇妙的共时性的关系，形成一种虚拟的部落式观影氛围，让B站成为极具互动分享和二次创造的文化社区。
+弹幕真正让B站从一个单向的视频播放平台，变成了双向的情感连接平台。
+技术优势和文化优势也创造了弹幕生态环境与用户生态环境。`
+        },
+        pinpaigushi: {
+          title: '品牌故事',
+          content: `哔哩哔哩（Nasdaq:BILI ；英文名称：bilibili，简称B站）现为中国年轻世代高度聚集的文化社区和视频平台，该网站于2009年6月26日创建，被粉丝们亲切地称为“B站”。
+
+2018年3月28日，哔哩哔哩在美国纳斯达克上市；
+2020年9月15日，B站定制的视频遥感卫星——“哔哩哔哩视频卫星”成功升空。
+
+B站早期是一个ACG（动画、漫画、游戏）内容创作与分享的视频网站。经过十年多的发展，围绕用户、创作者和内容，构建了一个源源不断产生优质内容的生态系统，B站已经涵盖7000多个兴趣圈层的多元文化社区。`,
+          preview_img: 'http://qnpic.top/yoona3.jpg'
+        },
+        tuce: {
+          title: '图册',
+          itemList: [
+            {
+              url: 'http://qnpic.top/yoona3.jpg',
+              title: 'tuce'
+            },
+            {
+              url: 'http://qnpic.top/yoona3.jpg',
+              title: '哔哩哔哩（Nasdaq:BILI ；英文名称：bilibili，简称B站）现为中国年轻世代高度聚集的文化社区和视频平'
+            },
+            {
+              url: 'http://qnpic.top/yoona3.jpg',
+              title: 'tuce'
+            }
+          ],
+          isShowMore: true
+        },
+        rongyu: {
+          title: '荣誉',
+          itemList: [
+            {
+              url: 'http://qnpic.top/yoona5.jpg',
+              title: 'tuce'
+            },
+            {
+              url: 'http://qnpic.top/yoona5.jpg',
+              title: '哔哩哔哩（Nasdaq:BILI ；英文名称：bilibili，简称B站）现为中国年轻世代高度聚集的文化社区和视频平'
+            },
+            {
+              url: 'http://qnpic.top/yoona5.jpg',
+              title: 'tuce'
+            }
+          ],
+          isShowMore: true
+        },
+        licheng: {
+          title: '历程',
+          stepsList: [
+            {
+              time: '2009年6月20号',
+              desc: '原AcFun网友⑨bishi（逸帝）创建视频分享网站Mikufans，当时没什么人去毕竟大多人觉得这就是盗版A站；'
+            },
+            {
+              time: '2009年6月20号',
+              desc: '原AcFun网友⑨bishi（逸帝）创建视频分享网站Mikufans，当时没什么人去毕竟大多人觉得这就是盗版A站；'
+            },
+            {
+              time: '2009年6月20号',
+              desc: '原AcFun网友⑨bishi（逸帝）创建视频分享网站Mikufans，当时没什么人去毕竟大多人觉得这就是盗版A站；'
+            }
+          ],
+          isShowMore: true
+        },
+        anli: {
+          title: '案例',
+          caseList: [
+            {
+              title: '猫 x B站双11种草大会，助力双11营销',
+              img_url: 'http://pic.qnpic.top/Yoona8.jpg',
+              desc: '桂格新品大果粒乳酸菌麦片上市，新加果干、酸奶块，主打年轻女性消费者，推'
+            },
+            {
+              title: '桂格 x《请吃红小豆吧！第三季》，树“追番神器”形象',
+              img_url: 'http://pic.qnpic.top/Yoona5.jpg',
+              desc: '临近双11，爆款清单频出，让人眼花缭乱，但值不值得买是每位消费者面临的大难'
+            },
+            {
+              title: '芬达 x bilibili脑洞节，与年轻人玩在一起',
+              img_url: 'http://pic.qnpic.top/Yoona8.jpg',
+              desc: '桂格新品大果粒乳酸菌麦片上市，新加果干、酸奶块，主打年轻女性消费者，推'
+            }
+          ],
+          isShowMore: true
+        },
+        kehu: {
+          title: '客户',
+          kehuList: [
+            {
+              title: '星巴克',
+              img_url: 'http://qnpic.top/yoona5.jpg',
+              desc: '星巴克（Starbucks）是美国一家连锁咖啡公司的名称，1971年成立，是全球最大的咖啡连锁店，其总部坐落美国华盛顿州西雅图市。星巴克旗下零售产品包括30多款全球顶级的咖啡豆、手工制作的浓缩咖啡和多款咖啡…'
+            },
+            {
+              title: '星巴克',
+              img_url: 'http://pic.qnpic.top/Yoona10.jpg',
+              desc: '星巴克（Starbucks）是美国一家连锁咖啡公司的名称，1971年成立，是全球最大的咖啡连锁店，其总部坐落美国华盛顿州西雅图市。星巴克旗下零售产品包括30多款全球顶级的咖啡豆、手工制作的浓缩咖啡和多款咖啡…'
+            },
+            {
+              title: '星巴克',
+              img_url: 'http://pic.qnpic.top/Yoona4.jpg',
+              desc: '星巴克（Starbucks）是美国一家连锁咖啡公司的名称，1971年成立，是全球最大的咖啡连锁店，其总部坐落美国华盛顿州西雅图市。星巴克旗下零售产品包括30多款全球顶级的咖啡豆、手工制作的浓缩咖啡和多款咖啡…'
+            }
+          ],
+          isShowMore: true
+        },
+        hezuohuoban: {
+          title: '合作伙伴',
+          kehuList: [
+            {
+              title: 'bilibili',
+              img_url: 'http://pic.qnpic.top/Yoona10.jpg',
+              desc: 'bilibili.com'
+            },
+            {
+              title: 'bilibili',
+              img_url: 'http://pic.qnpic.top/Yoona5.jpg',
+              desc: 'bilibili.com'
+            },
+            {
+              title: 'bilibili',
+              img_url: 'http://qnpic.top/yoona2.jpg',
+              desc: 'bilibili.com'
+            }
+          ],
+          isShowMore: true
+        },
+        meitizhanghao: {
+          title: '媒体账号',
+          kehuList: [
+            {
+              title: 'bilibili',
+              img_url: 'http://qnpic.top/yoona4.jpg',
+              desc: '微信公总好'
+            },
+            {
+              title: 'bilibili',
+              img_url: 'http://pic.qnpic.top/Yoona9.jpg',
+              desc: '微信公众号'
+            },
+            {
+              title: 'bilibili',
+              img_url: 'http://pic.qnpic.top/Yoona2.jpg',
+              desc: '百度'
+            }
+          ],
+          isShowMore: true
+        },
+        zixun: {
+          title: '资讯',
+          newsList: [
+            {
+              title: '2020-07-22 12:11:20',
+              img_url: 'http://pic.qnpic.top/Yoona10.jpg',
+              desc: '微Versa获B站领投数千万美元B轮融资，推出“信公总好'
+            },
+            {
+              title: '2020-07-22 12:11:20',
+              img_url: 'http://pic.qnpic.top/Yoona10.jpg',
+              desc: 'Versa获B站领投数千万美元B轮融资，推出“'
+            },
+            {
+              title: '2020-07-22 12:11:20',
+              img_url: 'http://pic.qnpic.top/Yoona10.jpg',
+              desc: 'Versa获B站领投数千万美元B轮融资，推出“'
+            }
+          ],
+          isShowMore: true
+        },
+
+        shangpin: {
+          title: '商品',
+          caseList: [
+            {
+              title: '猫 x B站双11种草大会，助力双11营销',
+              img_url: 'http://pic.qnpic.top/Yoona2.jpg',
+              desc: `<span style="color: #FA2D2C">¥699 ～ ¥799</span>&nbsp;&nbsp;&nbsp; <span><del>¥199</del><span>`
+            },
+            {
+              title: '桂格 x《请吃红小豆吧！第三季》，树“追番神器”形象',
+              img_url: 'http://pic.qnpic.top/Yoona3.jpg',
+              desc: `<span style="color: #FA2D2C">¥699 ～ ¥799</span>&nbsp;&nbsp;&nbsp; <span><del>¥199</del><span>`
+            },
+            {
+              title: '芬达 x bilibili脑洞节，与年轻人玩在一起',
+              img_url: 'http://pic.qnpic.top/Yoona2.jpg',
+              desc: `<span style="color: #FA2D2C">¥699 ～ ¥799</span>&nbsp;&nbsp;&nbsp; <span><del>¥199</del><span>`
+            }
+          ],
+          isShowMore: true
+        },
+
+        wenda: {
+          title: '问答',
+          itemsList: [
+            {
+              title: '游戏中心在哪里呢',
+              desc: '游戏中心隶属于国家以及防护中心，不可告知，爬',
+              preview_img: ''
+            },
+            {
+              title: '赛博朋克2077 好不好玩呢',
+              desc: '赛博朋克2077 好不好玩呢赛博朋克2077 好不好玩呢赛博朋克2077 好不好玩呢赛博朋克2077 好不好玩呢赛博朋克2077 好不好玩呢赛博朋克2077 好不好玩呢赛博朋克2077 好不好玩呢赛博朋克2077 好不好玩呢',
+              preview_img: 'http://pic.qnpic.top/Yoona4.jpg'
+            },
+            {
+              title: 'dance body',
+              desc: '游戏中心隶属于国家以及防护中心，不可告知，爬',
+              preview_img: 'http://pic.qnpic.top/Yoona5.jpg'
+            }
+          ],
+          isShowMore: true
+        },
+
+        zhishi: {
+          title: '知识',
+          itemsList: [
+            {
+              title: '小手一抖，OP没有小手一抖，OP没有小手一抖，OP没有小手一抖，OP没有小手一抖，OP没有',
+              desc: '得了灰指甲，一个传染两',
+              preview_img: 'http://pic.qnpic.top/Yoona6.jpg'
+            },
+            {
+              title: '小手一抖，OP没有',
+              desc: '得了灰指甲，一个传染两',
+              preview_img: 'http://pic.qnpic.top/Yoona9.jpg'
+            },
+            {
+              title: '小手一抖，OP没有',
+              desc: '得了灰指甲，一个传染两',
+              preview_img: 'http://pic.qnpic.top/Yoona8.jpg'
+            }
+          ],
+          isShowMore: true
+        },
+
+        zhaopin: {
+          title: '招聘',
+          itemsList: [
+            {
+              title: '资深U3D开发工程师',
+              salary: '8k-10k/周',
+              update_at: '2020-13-32 11:66:100',
+              tags: [
+                '需要驻唱', '不断外出', '加班无薪', '每日日报', '会说脏哈', '脑子不好', '不想加薪', '讨厌老板'
+              ]
+            },
+            {
+              title: '资深U3D开发工程师',
+              salary: '8k-10k/周',
+              update_at: '2020-13-32 11:66:100',
+              tags: [
+                '需要驻唱', '不断外出', '加班无薪', '每日日报', '会说脏哈', '脑子不好', '不想加薪', '讨厌老板'
+              ]
+            },
+            {
+              title: '资深U3D开发工程师',
+              salary: '8k-10k/周',
+              update_at: '2020-13-32 11:66:100',
+              tags: [
+                '需要驻唱', '不断外出', '加班无薪', '每日日报', '会说脏哈', '脑子不好', '不想加薪', '讨厌老板'
+              ]
+            }
+          ],
+          isShowMore: true
+        }
+      },
+      mounted: function () {
+        var imgUrls = []
+        $('#app img').each(function(_, e) {
+          imgUrls.push(e.src)
+        })
+        window.preview = new PreviewImage({
+          el: '#image-preview',
+          curr: 0,
+          urls: imgUrls,
+          transitionName: 'dialog',
+          transitionType: 'animation'
+        })
+        console.log(preview)
+        $('#app img').click(function() {
+          var index = $('img').index(this)
+          preview.setPreviewImage(index)
+        })
+      },
+      methods: {
+        shareFunction: function () {
+        }
+      }
+    })
+  </script>
+</html>

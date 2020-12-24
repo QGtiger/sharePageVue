@@ -1,0 +1,21 @@
+.lianxiwomen-cont .lianxiwomen-concat__list .concat-item {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  height: 50px;
+}
+
+.lianxiwomen-cont .lianxiwomen-concat__list .concat-item .icon-cont {
+  width: 35px;
+  height: 35px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.lianxiwomen-cont .lianxiwomen-concat__list .concat-item .item-content {
+  line-height: 22px;
+    font-size: 15px;
+    color: #303133;
+}

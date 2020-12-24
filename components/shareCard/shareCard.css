@@ -1,0 +1,45 @@
+.share-card-cont {
+  background-color: #fff;
+  padding: 15px 15px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.1);
+}
+
+.share-card-cont:not(:first-child) {
+  margin-top: 20px;
+}
+
+.share-card-cont .card-header__title {
+  overflow: hidden;
+}
+
+.share-card-cont .card-header__title .title-text {
+  font-size: 18px;
+  color: #909399;
+  float: left;
+}
+
+.share-card-cont .card-header__title .share-btn {
+  float: right;
+  cursor: pointer;
+}
+
+.share-card-cont .card-body__wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.share-card-cont .card-footer__wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.share-card-cont .card-footer__wrap .show-more__btn {
+  padding: 3px 8px;
+  color: #005B9F;
+  font-size: 15px;
+  cursor: pointer;
+  display: inline-block;
+}

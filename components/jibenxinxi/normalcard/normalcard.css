@@ -1,0 +1,27 @@
+.normalcard__wrap .normalcard-cont .normalcard-desc.collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 141px;
+}
+
+.normalcard__wrap .normalcard-cont {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.normalcard__wrap .normalcard-cont .normalcard-desc {
+  white-space: break-spaces;
+}
+
+.normalcard__wrap .normalcard-cont .collapsed-cont .collapsed-btn{
+  color: #0662ab;
+  cursor: pointer;
+}
+
+.normalcard__wrap .normalcard-cont .preview_banner {
+  height: 160px;
+  max-width: 280px;
+}

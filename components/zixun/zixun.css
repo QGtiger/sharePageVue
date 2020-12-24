@@ -1,0 +1,24 @@
+.zixun-cont .zixun-case__list .zixun-case__item {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.zixun-banner__cont{
+  height: 66px;
+  width: 100px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin-left: 8px;
+}
+
+.zixun-cont .zixun-case__list .zixun-case__item .zixun-case__main {
+  flex-grow: 1;
+}
+
+.zixun-cont .zixun-case__list .zixun-case__item .zixun-case__main .zixun-title{
+  color: #606266;
+}
+
+.zixun-cont .zixun-case__list .zixun-case__item .zixun-case__main .zixun-desc {
+  
+}

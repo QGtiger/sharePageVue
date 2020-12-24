@@ -1,0 +1,23 @@
+.case-cont .case-example__list .case-example__item {
+  margin-bottom: 10px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.case-cont .case-example__list .case-example__item .case-banner__cont {
+  height: 144px
+}
+
+.case-cont .case-example__list .case-example__item .case-title {
+  padding:8px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.case-cont .case-example__list .case-example__item .case-title .title-text {
+  text-align: center;
+}

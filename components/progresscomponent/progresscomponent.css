@@ -1,0 +1,61 @@
+@media (max-width: 600px) {
+  .progress-cont .progress-step__list .progress-step__item .progress-step__main {
+    flex-wrap: wrap;
+  }
+  .progress-cont .progress-step__list .progress-step__item .progress-step__main .step-desc {
+    width: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+}
+
+.progress-cont .progress-step__list .progress-step__item {
+  display: flex;
+  min-height: 40px;
+}
+
+.progress-cont .progress-step__list .progress-step__item .progress-step__icon {
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  display: inline-flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-cont .progress-step__list .progress-step__item .progress-step__icon .progress-step__icon-inner {
+  width: 10px;
+  height: 10px;
+  background-color: #C0C4CC;
+  border-radius: 100%;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.progress-step__head {
+  position: relative;
+}
+
+.progress-cont .progress-step__list .progress-step__item .progress-step__line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #C0C4CC;
+  left: 11px
+}
+
+.progress-cont .progress-step__list .progress-step__item .progress-step__main {
+  display: flex;
+}
+
+.progress-cont .progress-step__list .progress-step__item:not(:last-child) .progress-step__main {
+  padding-bottom: 15px;
+}
+
+.progress-cont .progress-step__list .progress-step__item .progress-step__main .step-title {
+  width: 130px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}

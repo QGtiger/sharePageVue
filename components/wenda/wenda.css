@@ -1,0 +1,34 @@
+.wenda-cont .wenda-case__list .wenda-case__item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.wenda-cont .wenda-case__list .wenda-case__item .wenda-case__title {
+  padding: 10px 0;
+}
+
+.wenda-cont .wenda-case__list .wenda-case__item .wenda-case__title .title-text {
+
+  line-height: 22px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 22px;
+}
+
+.wenda-cont .wenda-case__list .wenda-case__item .wenda-case__main{
+  display: flex;
+  min-height: 70px;
+}
+
+.wenda-cont .wenda-case__list .wenda-case__item .wenda-case__main .left-preview__cont {
+  width: 100px;
+  height: 70px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.wenda-cont .wenda-case__list .wenda-case__item .wenda-case__main .right-wenda__desc {
+  color: #606266
+}
